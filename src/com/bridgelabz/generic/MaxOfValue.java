@@ -1,44 +1,46 @@
 package com.bridgelabz.generic;
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class MaxOfValue {
-    public static void findMaxValue() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the Three Numbers: ");
-        Integer a = sc.nextInt();
-        Integer b = sc.nextInt();
-        Integer c = sc.nextInt();
-        Integer max = a; //Initially maximum value is Integer a.
-        if (b.compareTo(max) > 0) //compare Integer.
-            max = b;
-        if (c.compareTo(max) > 0)
-            max = c;
-        System.out.printf("The Maximum of three Integers (%d, %d and %d): ", a, b, c).println(max);
-    }
-    //method to find max of three floats
-    public static void findMaxValue(Float a , Float b , Float c)
+
+    public class MaxOfValue <E extends Comparable<E>>
     {
-        Float max = a; //Initially maximum value is Integer a.
-        if (b.compareTo(max) > 0)
-            max = b;
-        if (c.compareTo(max) > 0)
-            max = c;
-        // Print the max number
-        System.out.printf("The Maximum of three Float Numbers (%f,%f and %f): ",a,b,c).println(max);
-    }
-    //Method to find Maximum of three Strings
-    public static void findMaxValue(String string1 , String string2, String string3){
-        String max = string1;//Initially maximum value is String s1.
-        if (string2.compareTo(max) > 0)
-            max = string2;
-        if (string3.compareTo(max) > 0)
-            max = string3;
-        System.out.printf("The Maximum of three Strings (%s,%s and %s): ",string1,string2,string3).println(max);
-    }
-    //main method starts
-    public static void main(String[] args) {
-        MaxOfValue.findMaxValue(); //calling the method
-        MaxOfValue.findMaxValue(10f,20f,30f);
-        MaxOfValue.findMaxValue("ffg","ggvv","mgj");
-    }
+        private E[] Arr; //declaring array
+        //Constructor
+        MaxOfValue(E[] Arr) {
+            this.Arr = Arr;
+        }
+        public void display()
+        {
+            System.out.println("\nBefore Sorting:");
+            for(E element : Arr) {
+                System.out.printf("%s", element + ", ");
+            }
+            Arrays.sort(Arr);
+            System.out.println("\nAfter Sorting:");
+            for(E element : Arr) {
+                System.out.printf("%s", element + ", ");
+            }
+        }
+        //Generics method to find max value
+        public void findMaxValue() {
+            int lengthOfArray = Arr.length; //local variable
+            Arrays.sort(Arr); //sorting the array
+            System.out.println(Arr[lengthOfArray -1]); //after sorting the last element will be the max
+        }
+        //main method starts
+        public static void main(String[] args) {
+            //Declaring the values to the arrays
+            Integer[] integerValue = {10, 70, 20, 35, 40};
+            Float[] floatValue = {4.9f, 1.0f, 99.06f, 56.15f};
+            String[] stringValue = {"sfd", "wqr", "qwf"};
+            //Displaying the elements before and after sorting
+            new MaxOfValue(integerValue).display(); System.out.println();
+            new MaxOfValue(floatValue).display(); System.out.println();
+            new MaxOfValue(stringValue).display(); System.out.println();
+            //printing the max values
+            System.out.print("\nThe maximum of integers: " ); new MaxOfValue(integerValue).findMaxValue();
+            System.out.print("\nThe maximum of floats: "); new MaxOfValue(floatValue).findMaxValue();
+            System.out.print("\nThe maximum of strings: " ); new MaxOfValue(stringValue).findMaxValue();
+        }
 }
