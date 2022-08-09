@@ -7,13 +7,15 @@ import java.util.Arrays;
     {
         private E[] Arr; //declaring array
         //Constructor
-        MaxOfValue(E[] Arr) {
+        MaxOfValue(E[] Arr)
+        {
             this.Arr = Arr;
         }
-        public void display()
-        {
+        //method to display the sorted array
+        public void display() {
             System.out.println("\nBefore Sorting:");
-            for(E element : Arr) {
+            for(E element : Arr)
+            {
                 System.out.printf("%s", element + ", ");
             }
             Arrays.sort(Arr);
@@ -24,9 +26,16 @@ import java.util.Arrays;
         }
         //Generics method to find max value
         public void findMaxValue() {
-            int lengthOfArray = Arr.length; //local variable
-            Arrays.sort(Arr); //sorting the array
-            System.out.println(Arr[lengthOfArray -1]); //after sorting the last element will be the max
+            for(int i=0; i<Arr.length-1; i++) {
+                if(Arr[i].compareTo(Arr[i+1]) > 0) {
+                    Arr[i+1] = Arr[i];
+                }
+            }
+        }
+        //Method to print the max value
+        void printMax()
+        {
+            System.out.println(Arr[Arr.length - 1]);  //max value
         }
         //main method starts
         public static void main(String[] args) {
@@ -38,9 +47,13 @@ import java.util.Arrays;
             new MaxOfValue(integerValue).display(); System.out.println();
             new MaxOfValue(floatValue).display(); System.out.println();
             new MaxOfValue(stringValue).display(); System.out.println();
+
             //printing the max values
-            System.out.print("\nThe maximum of integers: " ); new MaxOfValue(integerValue).findMaxValue();
-            System.out.print("\nThe maximum of floats: "); new MaxOfValue(floatValue).findMaxValue();
-            System.out.print("\nThe maximum of strings: " ); new MaxOfValue(stringValue).findMaxValue();
+            new MaxOfValue(integerValue).findMaxValue();
+            new MaxOfValue(floatValue).findMaxValue();
+            new MaxOfValue(stringValue).findMaxValue();
+            System.out.print("\nThe maximum of strings: " ); new MaxOfValue(stringValue).printMax();
+            System.out.print("\nThe maximum of integers: " ); new MaxOfValue(integerValue).printMax();
+            System.out.print("\nThe maximum of floats: "); new MaxOfValue(floatValue).printMax();
         }
 }
